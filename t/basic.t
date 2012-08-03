@@ -5,12 +5,13 @@ use Test::More tests => 11;
 
 {
   package MyError;
-  use Moo;
+  use Moose;
   extends 'Throwable::Error';
+  no Moose;
 }
 
 sub throw_x {
-  MyError->throw({ message => 'foo bar baz' });
+  die MyError->new('foo bar baz');
 }
 
 sub call_throw_x {
